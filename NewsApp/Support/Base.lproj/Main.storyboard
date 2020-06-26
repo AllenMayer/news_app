@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="NewsApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="qoC-by-105">
+                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="NewsCell" rowHeight="100" id="S43-BN-OcI" customClass="NewsCell" customModule="NewsApp" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="414" height="100"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="S43-BN-OcI" id="E4T-8c-5Rt">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="100"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="9U3-AN-iVQ">
+                                                    <rect key="frame" x="20" y="6" width="150" height="88"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="150" id="E02-ST-fvT"/>
+                                                        <constraint firstAttribute="width" secondItem="9U3-AN-iVQ" secondAttribute="height" multiplier="149:87" id="fTh-HG-02Q"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="14" translatesAutoresizingMaskIntoConstraints="NO" id="nwv-7g-xq1">
+                                                    <rect key="frame" x="190" y="11" width="204" height="78"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="9U3-AN-iVQ" firstAttribute="centerY" secondItem="E4T-8c-5Rt" secondAttribute="centerY" id="6fM-s3-VZ4"/>
+                                                <constraint firstItem="nwv-7g-xq1" firstAttribute="bottom" secondItem="E4T-8c-5Rt" secondAttribute="bottomMargin" id="B5j-kW-4hE"/>
+                                                <constraint firstItem="nwv-7g-xq1" firstAttribute="trailing" secondItem="E4T-8c-5Rt" secondAttribute="trailingMargin" id="MGx-LE-sDQ"/>
+                                                <constraint firstItem="9U3-AN-iVQ" firstAttribute="leading" secondItem="E4T-8c-5Rt" secondAttribute="leading" constant="20" id="dtl-9O-Xys"/>
+                                                <constraint firstItem="nwv-7g-xq1" firstAttribute="top" secondItem="E4T-8c-5Rt" secondAttribute="topMargin" id="kd9-mx-GEh"/>
+                                                <constraint firstItem="nwv-7g-xq1" firstAttribute="leading" secondItem="9U3-AN-iVQ" secondAttribute="trailing" constant="20" id="nVa-Mm-h3L"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="imageview" destination="9U3-AN-iVQ" id="Lqy-7D-OU1"/>
+                                            <outlet property="titleLabel" destination="nwv-7g-xq1" id="q0g-HI-Hlr"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="qoC-by-105" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="0fF-jb-8lh"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="qoC-by-105" secondAttribute="bottom" id="7Yl-pH-u68"/>
+                            <constraint firstItem="qoC-by-105" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="8ZY-gc-k2J"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="qoC-by-105" secondAttribute="trailing" id="OgI-3S-Tax"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                    </view>
+                    <connections>
+                        <outlet property="tableView" destination="qoC-by-105" id="Dee-fF-LbJ"/>
+                        <outlet property="viewModel" destination="zsy-KL-Etk" id="zDl-ul-RUZ"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <customObject id="9JB-bo-Ig2" customClass="NewsClient" customModule="NewsApp" customModuleProvider="target"/>
+                <customObject id="zsy-KL-Etk" customClass="ViewModel" customModule="NewsApp" customModuleProvider="target">
+                    <connections>
+                        <outlet property="newsClient" destination="9JB-bo-Ig2" id="r2k-Re-qx4"/>
+                    </connections>
+                </customObject>
+            </objects>
+            <point key="canvasLocation" x="137.68115942028987" y="137.94642857142856"/>
+        </scene>
+    </scenes>
+</document>
