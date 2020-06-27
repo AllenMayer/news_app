@@ -9,10 +9,10 @@
 import Foundation
 
 struct News: Codable {
-    let articles: [Articles]
+    let articles: [Article]
 }
 
-struct Articles: Codable {
+struct Article: Codable {
     let author: String?
     let title: String?
     let description: String?

@@ -24,13 +24,17 @@ class ViewModel: NSObject {
     }
     
     func configureCell(cell: NewsCell, indexPath: IndexPath) {
-        cell.imageview.downloadFromLink(link: news?.articles[indexPath.row].urlToImage ?? "")        
+        cell.imageview.loadImage(from: news?.articles[indexPath.row].urlToImage ?? "")
         cell.titleLabel.text = news?.articles[indexPath.row].title ?? ""
-        
-        cell.accessoryType = UITableViewCell.AccessoryType.disclosureIndicator
     }
     
-    func configureNewsDetailVC() {
-        
+    func configureHeadCell(cell: HeadNewsCell, indexPath: IndexPath) {
+        cell.imageview.loadImage(from: news?.articles[indexPath.row].urlToImage ?? "")
+        cell.titleLabel.text = news?.articles[indexPath.row].title ?? ""
+        cell.dateLabel.text = news?.articles[indexPath.row].publishedAt?.convertDateFormat() ?? ""
+    }
+    
+    func configureNewsDetailVC(newsDetailsVC: NewsDetailsVC, indexPath: IndexPath) {
+        newsDetailsVC.article = news?.articles[indexPath.row]
     }
 }

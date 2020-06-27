@@ -2,7 +2,7 @@
 //  SceneDelegate.swift
 //  NewsApp
 //
-//  Created by Максим Семений on 26.06.2020.
+//  Created by Максим Семений on 27.06.2020.
 //  Copyright © 2020 Максим Семений. All rights reserved.
 //
 
@@ -50,4 +50,3 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
 
 }
-

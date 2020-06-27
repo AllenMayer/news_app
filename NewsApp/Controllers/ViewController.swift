@@ -15,9 +15,10 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        title = "Top Headlines"
         configureTableView()
         
-        viewModel.fetchNews(for: "us") {
+        viewModel.fetchNews(for: "ua") {
             DispatchQueue.main.async {
                 self.tableView.reloadData()
             }
@@ -27,7 +28,8 @@ class ViewController: UIViewController {
     func configureTableView() {
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.register(NewsCell.nib(), forCellReuseIdentifier: NewsCell.identifier)
+        tableView.register(NewsCell.self, forCellReuseIdentifier: NewsCell.identifier)
+        tableView.register(HeadNewsCell.self, forCellReuseIdentifier: HeadNewsCell.identifier)
     }
 }
 
@@ -37,13 +39,25 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return view.bounds.height / 10
+        return indexPath.row == 0 ? 300 : 120
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: NewsCell.identifier, for: indexPath) as! NewsCell 
-        viewModel.configureCell(cell: cell, indexPath: indexPath)
+        let cell =
+            indexPath.row == 0 ?
+                tableView.dequeueReusableCell(withIdentifier: HeadNewsCell.identifier, for: indexPath) as! HeadNewsCell
+                : tableView.dequeueReusableCell(withIdentifier: NewsCell.identifier, for: indexPath) as! NewsCell
+        indexPath.row == 0
+            ? viewModel.configureHeadCell(cell: cell as! HeadNewsCell, indexPath: indexPath)
+            : viewModel.configureCell(cell: cell as! NewsCell, indexPath: indexPath)
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        let destVC = storyboard?.instantiateViewController(identifier: NewsDetailsVC.storyboardID) as! NewsDetailsVC
+        viewModel.configureNewsDetailVC(newsDetailsVC: destVC, indexPath: indexPath)
+        navigationController?.pushViewController(destVC, animated: true)
     }
 }
 
