@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SafariServices
 
 class NewsDetailsVC: UIViewController {
     
@@ -119,7 +120,17 @@ class NewsDetailsVC: UIViewController {
         linkLabel.font = UIFont.systemFont(ofSize: 18, weight: .semibold)
         linkLabel.textColor = .link
         linkLabel.numberOfLines = 0
-        
         linkLabel.text = "Visit for more: \(article?.url ?? "")"
+        linkLabel.isUserInteractionEnabled = true
+
+        let tap = UITapGestureRecognizer(target: self, action: #selector(getInfo))
+        tap.numberOfTouchesRequired = 1
+        linkLabel.addGestureRecognizer(tap)
+    }
+    
+    @objc func getInfo() {
+        guard let url = URL(string: article!.url!) else { return }
+        let safariVC = SFSafariViewController(url: url)
+        present(safariVC, animated: true)
     }
 }

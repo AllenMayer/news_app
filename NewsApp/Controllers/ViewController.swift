@@ -18,7 +18,7 @@ class ViewController: UIViewController {
         title = "Top Headlines"
         configureTableView()
         
-        viewModel.fetchNews(for: "us") {
+        viewModel.fetchNews(for: "ua") {
             DispatchQueue.main.async {
                 self.tableView.reloadData()
             }
