@@ -22,6 +22,10 @@
 		61943B0024A7C96000EDA975 /* HeadNewsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61943AFF24A7C96000EDA975 /* HeadNewsCell.swift */; };
 		61943B0324A7D51900EDA975 /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61943B0224A7D51900EDA975 /* Date.swift */; };
 		61943B0524A7D9B400EDA975 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61943B0424A7D9B400EDA975 /* SceneDelegate.swift */; };
+		61D4B08824AA678500910523 /* BookmarksVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61D4B08724AA678500910523 /* BookmarksVC.swift */; };
+		61D4B08A24AA689B00910523 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61D4B08924AA689B00910523 /* Persistence.swift */; };
+		61D4B08D24AA6B0200910523 /* NewsError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61D4B08C24AA6B0100910523 /* NewsError.swift */; };
+		61D4B08F24AA89EC00910523 /* BookmarkViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61D4B08E24AA89EC00910523 /* BookmarkViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +46,10 @@
 		61943AFF24A7C96000EDA975 /* HeadNewsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeadNewsCell.swift; sourceTree = "<group>"; };
 		61943B0224A7D51900EDA975 /* Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
 		61943B0424A7D9B400EDA975 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		61D4B08724AA678500910523 /* BookmarksVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarksVC.swift; sourceTree = "<group>"; };
+		61D4B08924AA689B00910523 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
+		61D4B08C24AA6B0100910523 /* NewsError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsError.swift; sourceTree = "<group>"; };
+		61D4B08E24AA89EC00910523 /* BookmarkViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,6 +82,7 @@
 		61943AAA24A5E7A000EDA975 /* NewsApp */ = {
 			isa = PBXGroup;
 			children = (
+				61D4B08B24AA6AEB00910523 /* Utils */,
 				61943B0124A7D51200EDA975 /* Extensions */,
 				61943AB924A5E7A100EDA975 /* Info.plist */,
 				61943AC424A5EA1300EDA975 /* Services */,
@@ -90,6 +99,7 @@
 			isa = PBXGroup;
 			children = (
 				61943ACC24A5F12000EDA975 /* ViewModel.swift */,
+				61D4B08E24AA89EC00910523 /* BookmarkViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -117,6 +127,7 @@
 			children = (
 				61943AAF24A5E7A000EDA975 /* ViewController.swift */,
 				61943AFB24A7B94800EDA975 /* NewsDetailsVC.swift */,
+				61D4B08724AA678500910523 /* BookmarksVC.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -138,6 +149,7 @@
 			children = (
 				61943AC724A5EC7000EDA975 /* NewsClient.swift */,
 				61943AFD24A7B98A00EDA975 /* Cache.swift */,
+				61D4B08924AA689B00910523 /* Persistence.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -148,6 +160,14 @@
 				61943B0224A7D51900EDA975 /* Date.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		61D4B08B24AA6AEB00910523 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				61D4B08C24AA6B0100910523 /* NewsError.swift */,
+			);
+			path = Utils;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -224,9 +244,13 @@
 				61943AC624A5EB5D00EDA975 /* NewsModel.swift in Sources */,
 				61943AB024A5E7A000EDA975 /* ViewController.swift in Sources */,
 				61943AFC24A7B94800EDA975 /* NewsDetailsVC.swift in Sources */,
+				61D4B08A24AA689B00910523 /* Persistence.swift in Sources */,
+				61D4B08F24AA89EC00910523 /* BookmarkViewModel.swift in Sources */,
+				61D4B08D24AA6B0200910523 /* NewsError.swift in Sources */,
 				61943AC824A5EC7000EDA975 /* NewsClient.swift in Sources */,
 				61943AAC24A5E7A000EDA975 /* AppDelegate.swift in Sources */,
 				61943AFA24A7B39200EDA975 /* NewsImageView.swift in Sources */,
+				61D4B08824AA678500910523 /* BookmarksVC.swift in Sources */,
 				61943AFE24A7B98A00EDA975 /* Cache.swift in Sources */,
 				61943B0324A7D51900EDA975 /* Date.swift in Sources */,
 				61943AF724A671D000EDA975 /* NewsCell.swift in Sources */,

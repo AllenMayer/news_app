@@ -46,8 +46,6 @@ class NewsCell: UITableViewCell {
             dateLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor),
             dateLabel.heightAnchor.constraint(equalTo: contentView.heightAnchor, multiplier: 1/5)
         ])
-        
-        self.accessoryType = UITableViewCell.AccessoryType.disclosureIndicator
     }
     
     private func configureImage() {

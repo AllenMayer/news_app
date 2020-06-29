@@ -14,9 +14,9 @@ class NewsDetailsVC: UIViewController {
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var contentView: UIView!
     @IBOutlet weak var contentHeight: NSLayoutConstraint!
-    
+        
     static let storyboardID = "NewsDetailsVC"
-    
+        
     var article: Article? = nil
     
     let imageView = NewsImageView()
@@ -35,6 +35,7 @@ class NewsDetailsVC: UIViewController {
         configureDescriptionLabel()
         configureAuthorLabel()
         configureLinkLabel()
+        configureNavigationButtons()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -76,7 +77,7 @@ class NewsDetailsVC: UIViewController {
             
             linkLabel.topAnchor.constraint(equalTo: authorLabel.bottomAnchor, constant: padding*2),
             linkLabel.leadingAnchor.constraint(equalTo: authorLabel.leadingAnchor),
-            linkLabel.trailingAnchor.constraint(equalTo: authorLabel.trailingAnchor)
+            linkLabel.trailingAnchor.constraint(equalTo: authorLabel.trailingAnchor),
         ])
     }
 
@@ -133,4 +134,25 @@ class NewsDetailsVC: UIViewController {
         let safariVC = SFSafariViewController(url: url)
         present(safariVC, animated: true)
     }
+    
+    private func configureNavigationButtons() {
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Close", style: .done, target: self, action: #selector(dismissAction))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Save", style: .plain, target: self, action: #selector(save))
+    }
+    
+    @objc func dismissAction() {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    @objc func save() {
+        guard let article = self.article else { return }
+        PersistenceManager.updateWith(article: article, actionType: .add) { error in
+            guard let _ = error else {
+                print("saved!")
+                return
+            }
+            print("Error while saving")
+        }
+    }
+    
 }

@@ -18,6 +18,10 @@ class ViewController: UIViewController {
         title = "Top Headlines"
         configureTableView()
         
+//        let domain = Bundle.main.bundleIdentifier!
+//        UserDefaults.standard.removePersistentDomain(forName: domain)
+//        UserDefaults.standard.synchronize()
+        
         viewModel.fetchNews(for: "ua") {
             DispatchQueue.main.async {
                 self.tableView.reloadData()
@@ -57,7 +61,8 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
         tableView.deselectRow(at: indexPath, animated: true)
         let destVC = storyboard?.instantiateViewController(identifier: NewsDetailsVC.storyboardID) as! NewsDetailsVC
         viewModel.configureNewsDetailVC(newsDetailsVC: destVC, indexPath: indexPath)
-        navigationController?.pushViewController(destVC, animated: true)
+        let nav = UINavigationController(rootViewController: destVC)
+        navigationController?.present(nav, animated: true)
     }
 }
 
