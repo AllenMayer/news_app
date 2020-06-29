@@ -26,6 +26,7 @@ class ViewModel: NSObject {
     func configureCell(cell: NewsCell, indexPath: IndexPath) {
         cell.imageview.loadImage(from: news?.articles[indexPath.row].urlToImage ?? "")
         cell.titleLabel.text = news?.articles[indexPath.row].title ?? ""
+        cell.dateLabel.text = news?.articles[indexPath.row].publishedAt?.convertDateFormat() ?? ""
     }
     
     func configureHeadCell(cell: HeadNewsCell, indexPath: IndexPath) {

@@ -18,7 +18,7 @@ class ViewController: UIViewController {
         title = "Top Headlines"
         configureTableView()
         
-        viewModel.fetchNews(for: "ua") {
+        viewModel.fetchNews(for: "us") {
             DispatchQueue.main.async {
                 self.tableView.reloadData()
             }
@@ -44,8 +44,8 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell =
-            indexPath.row == 0 ?
-                tableView.dequeueReusableCell(withIdentifier: HeadNewsCell.identifier, for: indexPath) as! HeadNewsCell
+            indexPath.row == 0
+                ? tableView.dequeueReusableCell(withIdentifier: HeadNewsCell.identifier, for: indexPath) as! HeadNewsCell
                 : tableView.dequeueReusableCell(withIdentifier: NewsCell.identifier, for: indexPath) as! NewsCell
         indexPath.row == 0
             ? viewModel.configureHeadCell(cell: cell as! HeadNewsCell, indexPath: indexPath)

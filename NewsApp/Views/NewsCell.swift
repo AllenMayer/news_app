@@ -12,42 +12,61 @@ class NewsCell: UITableViewCell {
     
     let imageview = NewsImageView()
     let titleLabel = UILabel()
+    let dateLabel = UILabel()
     
     static let identifier = "NewsCell"
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         configureCell()
+        configureImage()
+        configureTitle()
+        configureDate()
     }
     
     private func configureCell() {
         contentView.addSubview(imageview)
         contentView.addSubview(titleLabel)
+        contentView.addSubview(dateLabel)
         
-        imageview.translatesAutoresizingMaskIntoConstraints = false
-        titleLabel.translatesAutoresizingMaskIntoConstraints = false
+        let padding: CGFloat = 10
         
         NSLayoutConstraint.activate([
-            imageview.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
-            imageview.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -10),
-            imageview.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
-            imageview.widthAnchor.constraint(equalTo: contentView.heightAnchor, constant: 20),
+            imageview.topAnchor.constraint(equalTo: contentView.topAnchor, constant: padding),
+            imageview.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -padding),
+            imageview.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: padding),
+            imageview.widthAnchor.constraint(equalTo: contentView.heightAnchor, constant: padding*2),
             
-            titleLabel.leadingAnchor.constraint(equalTo: imageview.trailingAnchor, constant: 20),
-            titleLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10),
+            titleLabel.leadingAnchor.constraint(equalTo: imageview.trailingAnchor, constant: padding),
+            titleLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -padding/2),
             titleLabel.topAnchor.constraint(equalTo: imageview.topAnchor),
-            titleLabel.bottomAnchor.constraint(equalTo: imageview.bottomAnchor)
+            titleLabel.heightAnchor.constraint(equalTo: contentView.heightAnchor, multiplier: 3/5),
+            
+            dateLabel.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor),
+            dateLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor),
+            dateLabel.heightAnchor.constraint(equalTo: contentView.heightAnchor, multiplier: 1/5)
         ])
         
+        self.accessoryType = UITableViewCell.AccessoryType.disclosureIndicator
+    }
+    
+    private func configureImage() {
+        imageview.translatesAutoresizingMaskIntoConstraints = false
         imageview.contentMode = .scaleAspectFill
         imageview.layer.masksToBounds = true
         imageview.layer.cornerRadius = 15
-        
-        titleLabel.numberOfLines = 0
-        titleLabel.font = UIFont(name: "Helvetica", size: self.frame.height / 3)
-        
-        self.accessoryType = UITableViewCell.AccessoryType.disclosureIndicator
-        
+    }
+    
+    private func configureTitle() {
+        titleLabel.translatesAutoresizingMaskIntoConstraints = false
+        titleLabel.numberOfLines = 3
+        titleLabel.font = UIFont.systemFont(ofSize: self.frame.height / 3, weight: .medium)
+       }
+    
+    private func configureDate() {
+        dateLabel.translatesAutoresizingMaskIntoConstraints = false
+        dateLabel.font = UIFont.systemFont(ofSize: self.frame.height / 3.5, weight: .regular)
+        dateLabel.textColor = .secondaryLabel
     }
     
     required init?(coder: NSCoder) {

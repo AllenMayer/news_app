@@ -29,18 +29,22 @@ class HeadNewsCell: UITableViewCell {
         contentView.addSubview(titleLabel)
         contentView.addSubview(dateLabel)
         
+        let padding: CGFloat = 10
+        
         NSLayoutConstraint.activate([
-            titleLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
-            titleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
-            titleLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10),
+            titleLabel.topAnchor.constraint(equalTo: contentView.topAnchor),
+            titleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: padding),
+            titleLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -padding),
+            titleLabel.heightAnchor.constraint(equalTo: contentView.heightAnchor, multiplier: 2/8),
             
-            imageview.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 10),
+            imageview.topAnchor.constraint(equalTo: titleLabel.bottomAnchor),
             imageview.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor),
-            imageview.trailingAnchor.constraint(equalTo: titleLabel.trailingAnchor, constant: -20),
-            imageview.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -35),
+            imageview.trailingAnchor.constraint(equalTo: titleLabel.trailingAnchor, constant: -padding),
+            imageview.heightAnchor.constraint(equalTo: contentView.heightAnchor, multiplier: 5/8),
             
             dateLabel.leadingAnchor.constraint(equalTo: imageview.leadingAnchor),
-            dateLabel.topAnchor.constraint(equalTo: imageview.bottomAnchor, constant: 10)
+            dateLabel.topAnchor.constraint(equalTo: imageview.bottomAnchor),
+            dateLabel.heightAnchor.constraint(equalTo: contentView.heightAnchor, multiplier: 1/8)
         ])
         
         self.accessoryType = UITableViewCell.AccessoryType.disclosureIndicator
@@ -48,7 +52,7 @@ class HeadNewsCell: UITableViewCell {
     
     private func configureImage() {
         imageview.translatesAutoresizingMaskIntoConstraints = false
-        imageview.contentMode = .scaleToFill
+        imageview.contentMode = .scaleAspectFill
         imageview.layer.masksToBounds = true
         imageview.layer.cornerRadius = 15
     }
@@ -56,12 +60,12 @@ class HeadNewsCell: UITableViewCell {
     private func configureTitle() {
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         titleLabel.numberOfLines = 0
-        titleLabel.font = UIFont(name: "Helvetica-Bold", size: self.frame.height / 2.5)
+        titleLabel.font = UIFont.systemFont(ofSize: self.frame.height / 2.5, weight: .semibold)
     }
     
     private func configureDate() {
         dateLabel.translatesAutoresizingMaskIntoConstraints = false
-        dateLabel.font = UIFont(name: "Helvetica", size: self.frame.height / 3)
+        dateLabel.font = UIFont.systemFont(ofSize: self.frame.height / 3, weight: .medium)
         dateLabel.textColor = .secondaryLabel
     }
     
