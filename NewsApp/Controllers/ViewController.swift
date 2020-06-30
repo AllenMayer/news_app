@@ -12,11 +12,20 @@ class ViewController: UIViewController {
     
     @IBOutlet var viewModel: ViewModel!
     @IBOutlet weak var tableView: UITableView!
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Top Headlines"
         configureTableView()
+        
+        PersistenceManager.retreiveArticles { (result) in
+            switch result {
+            case .success(let articles):
+                print(articles)
+            case .failure(let error):
+                print(error.rawValue)
+            }
+        }
         
         viewModel.fetchNews(for: "us") {
             DispatchQueue.main.async {
@@ -78,4 +87,3 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
         return UISwipeActionsConfiguration(actions: [saveAction])
     }
 }
-

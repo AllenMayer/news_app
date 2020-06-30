@@ -89,8 +89,7 @@ extension BookmarksVC: UITableViewDelegate, UITableViewDataSource {
             PersistenceManager.updateWith(article: article, actionType: .remove) { error in
                 guard let error = error else {
                     print("deleted!")
-                    self.articles.remove(at: indexPath.row)
-                    tableView.deleteRows(at: [indexPath], with: .automatic)
+                    self.getBookmarks()
                     return
                 }
                 print(error.rawValue)
