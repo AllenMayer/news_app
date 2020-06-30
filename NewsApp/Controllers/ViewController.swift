@@ -18,11 +18,7 @@ class ViewController: UIViewController {
         title = "Top Headlines"
         configureTableView()
         
-//        let domain = Bundle.main.bundleIdentifier!
-//        UserDefaults.standard.removePersistentDomain(forName: domain)
-//        UserDefaults.standard.synchronize()
-        
-        viewModel.fetchNews(for: "ua") {
+        viewModel.fetchNews(for: "us") {
             DispatchQueue.main.async {
                 self.tableView.reloadData()
             }
@@ -63,6 +59,23 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
         viewModel.configureNewsDetailVC(newsDetailsVC: destVC, indexPath: indexPath)
         let nav = UINavigationController(rootViewController: destVC)
         navigationController?.present(nav, animated: true)
+    }
+    
+    func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let saveAction = UIContextualAction(style: .normal, title: "Save") { [weak self] (action, view, completion) in
+            guard let self = self else { return }
+            guard let article = self.viewModel.news?.articles[indexPath.row] else { return }
+            PersistenceManager.updateWith(article: article, actionType: .add) { error in
+                guard let error = error else {
+                    print("saved!")
+                    return
+                }
+                print(error.rawValue)
+            }
+            completion(true)
+        }
+        saveAction.image = UIImage(systemName: "bookmark.fill")
+        return UISwipeActionsConfiguration(actions: [saveAction])
     }
 }
 

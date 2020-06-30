@@ -9,6 +9,6 @@
 import Foundation
 
 enum NewsError : String, Error {
-    case unableToBookmark = "There was an error favoriting this user. Please try again."
-    case alreadyInBookmarks = "You've already favorited this user."
+    case unableToBookmark = "There was an error adding this article. Please try again."
+    case alreadyInBookmarks = "You've already added this article."
 }

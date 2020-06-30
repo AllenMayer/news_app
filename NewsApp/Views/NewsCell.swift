@@ -32,8 +32,8 @@ class NewsCell: UITableViewCell {
         let padding: CGFloat = 10
         
         NSLayoutConstraint.activate([
-            imageview.topAnchor.constraint(equalTo: contentView.topAnchor, constant: padding),
-            imageview.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -padding),
+            imageview.heightAnchor.constraint(equalTo: contentView.heightAnchor, constant: -padding*2),
+            imageview.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
             imageview.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: padding),
             imageview.widthAnchor.constraint(equalTo: contentView.heightAnchor, constant: padding*2),
             

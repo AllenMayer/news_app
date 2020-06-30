@@ -33,6 +33,7 @@ enum PersistenceManager {
                     completed(save(articles: articles))
                 case .remove:
                     articles.removeAll() { $0.title == article.title}
+                    completed(save(articles: articles))
             }
             case .failure(let error):
                 completed(error)

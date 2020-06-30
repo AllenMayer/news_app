@@ -19,13 +19,15 @@ class NewsDetailsVC: UIViewController {
         
     var article: Article? = nil
     
+    weak var updateDelegate: NewsDetailsVCDelegate?
+    
     let imageView = NewsImageView()
     let titleLabel = UILabel()
     let dateLabel = UILabel()
     let descriptionLabel = UILabel()
     let authorLabel = UILabel()
     let linkLabel = UILabel()
-    
+        
     override func viewDidLoad() {
         super.viewDidLoad()
         configureContentView()
@@ -136,23 +138,57 @@ class NewsDetailsVC: UIViewController {
     }
     
     private func configureNavigationButtons() {
+        PersistenceManager.retreiveArticles { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .success(let articles):
+                let matchedArticle = articles.filter { $0.title == self.article!.title }
+                if matchedArticle.isEmpty {
+                    self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Save", style: .done, target: self, action: #selector(self.saveArticle))
+                } else {
+                    self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Delete", style: .done, target: self, action: #selector(self.deleteArticle))
+                    self.navigationItem.rightBarButtonItem?.tintColor = .red
+                }
+            case .failure(let error):
+                print(error.rawValue)
+            }
+        }
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Close", style: .done, target: self, action: #selector(dismissAction))
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Save", style: .plain, target: self, action: #selector(save))
+        
     }
     
     @objc func dismissAction() {
         self.dismiss(animated: true, completion: nil)
     }
     
-    @objc func save() {
+    @objc func saveArticle() {
         guard let article = self.article else { return }
-        PersistenceManager.updateWith(article: article, actionType: .add) { error in
-            guard let _ = error else {
+        PersistenceManager.updateWith(article: article, actionType: .add) { [weak self] error in
+            guard let self = self else { return }
+            guard let error = error else {
+                self.configureNavigationButtons()
                 print("saved!")
                 return
             }
-            print("Error while saving")
+            print(error.rawValue)
         }
     }
     
+    @objc func deleteArticle() {
+        guard let article = self.article else { return }
+        PersistenceManager.updateWith(article: article, actionType: .remove) { [weak self] error in
+            guard let self = self else { return }
+            guard let error = error else {
+                self.configureNavigationButtons()
+                self.updateDelegate?.didTapDeleteButton()
+                print("deleted!")
+                return
+            }
+            print(error.rawValue)
+        }
+    }
+}
+
+protocol NewsDetailsVCDelegate: AnyObject {
+    func didTapDeleteButton()
 }

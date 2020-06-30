@@ -26,6 +26,7 @@
 		61D4B08A24AA689B00910523 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61D4B08924AA689B00910523 /* Persistence.swift */; };
 		61D4B08D24AA6B0200910523 /* NewsError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61D4B08C24AA6B0100910523 /* NewsError.swift */; };
 		61D4B08F24AA89EC00910523 /* BookmarkViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61D4B08E24AA89EC00910523 /* BookmarkViewModel.swift */; };
+		61D4B09124AA8C9800910523 /* UITableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61D4B09024AA8C9800910523 /* UITableView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -50,6 +51,7 @@
 		61D4B08924AA689B00910523 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		61D4B08C24AA6B0100910523 /* NewsError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsError.swift; sourceTree = "<group>"; };
 		61D4B08E24AA89EC00910523 /* BookmarkViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkViewModel.swift; sourceTree = "<group>"; };
+		61D4B09024AA8C9800910523 /* UITableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITableView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -158,6 +160,7 @@
 			isa = PBXGroup;
 			children = (
 				61943B0224A7D51900EDA975 /* Date.swift */,
+				61D4B09024AA8C9800910523 /* UITableView.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -252,6 +255,7 @@
 				61943AFA24A7B39200EDA975 /* NewsImageView.swift in Sources */,
 				61D4B08824AA678500910523 /* BookmarksVC.swift in Sources */,
 				61943AFE24A7B98A00EDA975 /* Cache.swift in Sources */,
+				61D4B09124AA8C9800910523 /* UITableView.swift in Sources */,
 				61943B0324A7D51900EDA975 /* Date.swift in Sources */,
 				61943AF724A671D000EDA975 /* NewsCell.swift in Sources */,
 				61943B0024A7C96000EDA975 /* HeadNewsCell.swift in Sources */,

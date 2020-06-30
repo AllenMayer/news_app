@@ -54,6 +54,7 @@ class BookmarksVC: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(NewsCell.self, forCellReuseIdentifier: NewsCell.identifier)
+        tableView.removeExcessCells()
     }
 }
 
@@ -76,7 +77,32 @@ extension BookmarksVC: UITableViewDelegate, UITableViewDataSource {
         tableView.deselectRow(at: indexPath, animated: true)
         let destVC = storyboard?.instantiateViewController(identifier: NewsDetailsVC.storyboardID) as! NewsDetailsVC
         bookmarkViewModel.configureDetailsVCfromBookmarks(newsDetailsVC: destVC, articles: articles, indexPath: indexPath)
+        destVC.updateDelegate = self
         let nav = UINavigationController(rootViewController: destVC)
         navigationController?.present(nav, animated: true)
+    }
+    
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { [weak self] (action, view, completion) in
+            guard let self = self else { return }
+            let article = self.articles[indexPath.row]
+            PersistenceManager.updateWith(article: article, actionType: .remove) { error in
+                guard let error = error else {
+                    print("deleted!")
+                    self.articles.remove(at: indexPath.row)
+                    tableView.deleteRows(at: [indexPath], with: .automatic)
+                    return
+                }
+                print(error.rawValue)
+            }
+            completion(true)
+        }
+        return UISwipeActionsConfiguration(actions: [deleteAction])
+    }
+}
+
+extension BookmarksVC: NewsDetailsVCDelegate {
+    func didTapDeleteButton() {
+        getBookmarks()
     }
 }
