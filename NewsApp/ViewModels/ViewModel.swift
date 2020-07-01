@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CountryPickerView
 
 class ViewModel: NSObject {
     @IBOutlet var newsClient: NewsClient!
@@ -37,5 +38,16 @@ class ViewModel: NSObject {
     
     func configureNewsDetailVC(newsDetailsVC: NewsDetailsVC, indexPath: IndexPath) {
         newsDetailsVC.article = news?.articles[indexPath.row]
+    }
+    
+    func configureCountriesForCountryPicker(countryPicker: CountryPickerView) -> [Country] {
+        let UA = countryPicker.getCountryByCode("UA")!
+        let RU = countryPicker.getCountryByCode("RU")!
+        let US = countryPicker.getCountryByCode("US")!
+        let CN = countryPicker.getCountryByCode("CN")!
+        let CA = countryPicker.getCountryByCode("CA")!
+        let GB = countryPicker.getCountryByCode("GB")!
+        let JP = countryPicker.getCountryByCode("JP")!
+        return [UA, RU, US, CA, GB, CN, JP]
     }
 }

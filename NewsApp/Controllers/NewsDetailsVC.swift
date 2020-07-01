@@ -59,7 +59,7 @@ class NewsDetailsVC: UIViewController {
             imageView.topAnchor.constraint(equalTo: contentView.topAnchor),
             imageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             imageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            imageView.heightAnchor.constraint(equalTo: imageView.widthAnchor, multiplier: 1/1.5),
+            imageView.heightAnchor.constraint(equalTo: imageView.widthAnchor, multiplier: 3/5),
             
             titleLabel.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: padding*1.5),
             titleLabel.leadingAnchor.constraint(equalTo: imageView.leadingAnchor, constant: padding),
@@ -86,7 +86,7 @@ class NewsDetailsVC: UIViewController {
     private func configureImage() {
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.loadImage(from: article?.urlToImage ?? "")
-        imageView.contentMode = .scaleAspectFill
+        imageView.contentMode = .scaleToFill
     }
     
     private func configureTitle() {

@@ -7,38 +7,67 @@
 //
 
 import UIKit
+import CountryPickerView
 
 class ViewController: UIViewController {
     
     @IBOutlet var viewModel: ViewModel!
     @IBOutlet weak var tableView: UITableView!
     
+    let countryPickerView = CountryPickerView()
+    let flagView = UIImageView()
+    var newsCountry = "US"
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Top Headlines"
+        configureVC()
         configureTableView()
-        
-        PersistenceManager.retreiveArticles { (result) in
-            switch result {
-            case .success(let articles):
-                print(articles)
-            case .failure(let error):
-                print(error.rawValue)
-            }
-        }
-        
-        viewModel.fetchNews(for: "us") {
+        configureCountryPicker()
+        configureRightBarButton()
+    }
+    
+    private func configureVC() {
+        viewModel.fetchNews(for: newsCountry) {
             DispatchQueue.main.async {
                 self.tableView.reloadData()
             }
         }
     }
     
-    func configureTableView() {
+    private func configureTableView() {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(NewsCell.self, forCellReuseIdentifier: NewsCell.identifier)
         tableView.register(HeadNewsCell.self, forCellReuseIdentifier: HeadNewsCell.identifier)
+    }
+    
+    private func configureCountryPicker() {
+        countryPickerView.delegate = self
+        countryPickerView.dataSource = self
+        countryPickerView.setCountryByCode(newsCountry)
+    }
+    
+    private func configureRightBarButton() {
+        getCountryImage()
+        let button = UIButton(type: .custom)
+        button.setImage(flagView.image, for: .normal)
+        button.layer.masksToBounds = true
+        button.layer.cornerRadius = 5
+        button.layer.borderWidth = 1
+        button.contentEdgeInsets = UIEdgeInsets(top: 4, left: 4, bottom: 4, right: 4)
+        button.addTarget(self, action: #selector(presentCountryPicker), for: .touchUpInside)
+        let rightBarButton = UIBarButtonItem(customView: button)
+        navigationItem.rightBarButtonItem = rightBarButton
+    }
+    
+    @objc func presentCountryPicker() {
+        countryPickerView.showCountriesList(from: self)
+    }
+    
+    private func getCountryImage(){
+        guard let country = countryPickerView.getCountryByCode(newsCountry) else { return }
+        flagView.image = country.flag
     }
 }
 
@@ -85,5 +114,27 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
         }
         saveAction.image = UIImage(systemName: "bookmark.fill")
         return UISwipeActionsConfiguration(actions: [saveAction])
+    }
+}
+
+extension ViewController: CountryPickerViewDelegate, CountryPickerViewDataSource {
+    func countryPickerView(_ countryPickerView: CountryPickerView, didSelectCountry country: Country) {
+        newsCountry = country.code
+        configureRightBarButton()
+        configureVC()
+        tableView.setContentOffset(CGPoint.zero, animated: false)
+    }
+    
+    func preferredCountries(in countryPickerView: CountryPickerView) -> [Country] {
+        let countries = viewModel.configureCountriesForCountryPicker(countryPicker: countryPickerView)
+        return countries
+    }
+    
+    func sectionTitleForPreferredCountries(in countryPickerView: CountryPickerView) -> String? {
+        return "Preferred Countries"
+    }
+    
+    func showOnlyPreferredSection(in countryPickerView: CountryPickerView) -> Bool {
+        return true
     }
 }
