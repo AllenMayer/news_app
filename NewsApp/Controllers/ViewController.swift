@@ -16,7 +16,13 @@ class ViewController: UIViewController {
     
     let countryPickerView = CountryPickerView()
     let flagView = UIImageView()
-    var newsCountry = "US"
+    
+    var newsCountry = ""
+    
+    override func loadView() {
+        super.loadView()
+        configureUserLocale()
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -68,6 +74,12 @@ class ViewController: UIViewController {
     private func getCountryImage(){
         guard let country = countryPickerView.getCountryByCode(newsCountry) else { return }
         flagView.image = country.flag
+    }
+    
+    private func configureUserLocale() {
+        if let locale = Locale.current.regionCode {
+            newsCountry = "\(locale)"
+        }
     }
 }
 

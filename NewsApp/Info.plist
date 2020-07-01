@@ -61,5 +61,9 @@
 		<string>UIInterfaceOrientationPortrait</string>
 		<string>UIInterfaceOrientationPortraitUpsideDown</string>
 	</array>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>Please allow location to show the local news.</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Please allow location to show the local news.</string>
 </dict>
 </plist>
